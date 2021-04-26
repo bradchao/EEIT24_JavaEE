@@ -17,19 +17,29 @@ public class Brad08 extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String x = request.getParameter("x");
 		String y = request.getParameter("y");
+		String op = request.getParameter("op");
 		String result = "";
 		
 		if (x != null && y != null) {
 			try {
 				int intX = Integer.parseInt(x);
 				int intY = Integer.parseInt(y);
-				result = intX + intY + "";
+				switch (op) {
+					case "1": result = intX + intY + ""; break;
+					case "2": result = intX - intY + ""; break;
+					case "3": result = intX * intY + ""; break;
+					case "4": 
+						int r1 = intX / intY;
+						int r2 = intX % intY;
+						result = r1 + ((r2==0)?"":" ...... " + r2); 
+						break;
+				}
 				
 			}catch(Exception e) {
 				
 			}
 		}else {
-			x = y = "";
+			x = y = op = "";
 		}
 		
 		response.setContentType("text/html; charset=UTF-8");
@@ -39,7 +49,12 @@ public class Brad08 extends HttpServlet {
 			.append("<hr>")
 			.append("<form action='Brad08'>")
 			.append("<input type='number' name='x' value='" + x + "' />")
-			.append("+")
+			.append("<select name='op'>")
+			.append("<option value='1' " + (op.equals("1")?"selected":"") + ">+</option>")
+			.append("<option value='2' " + (op.equals("2")?"selected":"") + ">-</option>")
+			.append("<option value='3' " + (op.equals("3")?"selected":"") + ">x</option>")
+			.append("<option value='4' " + (op.equals("4")?"selected":"")+ ">/</option>")
+			.append("</select>")
 			.append("<input type='number' name='y' value='" + y + "' />")
 			.append("<input type='submit' value='='>")
 			.append(result)
