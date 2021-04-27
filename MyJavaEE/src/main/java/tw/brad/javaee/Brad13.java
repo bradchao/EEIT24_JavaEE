@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,20 +21,30 @@ public class Brad13 extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		String x = request.getParameter("x");
+		String op = request.getParameter("op");
 		String y = request.getParameter("y");
 		String result = request.getParameter("result");
+		String vfile = request.getParameter("vfile");
+		
+		String op1 = op.equals("1")?"selected":"";
+		String op2 = op.equals("2")?"selected":"";
+		String op3 = op.equals("3")?"selected":"";
+		String op4 = op.equals("4")?"selected":"";
 		
 		PrintWriter out = response.getWriter();
-		String html = loadView();
-		out.print(String.format(html, x, y, result));
+		String html = loadView(vfile);
+		out.print(String.format(html, x, op1, op2, op3, op4, y, result));
 		response.flushBuffer();
 		
 	}
 	
-	private String loadView() {
+	private String loadView(String viewFile) {
+		ServletContext context = getServletContext();
+		String viewPath = context.getInitParameter("viewPath");
+		
 		StringBuffer sb = new StringBuffer();
 		try {
-			File source = new File ("C:\\Users\\USER\\git\\repository4\\MyJavaEE\\src\\main\\webapp\\views\\view1.html");
+			File source = new File (viewPath, viewFile);
 			BufferedReader reader = 
 				new BufferedReader(
 					new InputStreamReader(
