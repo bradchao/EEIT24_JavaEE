@@ -1,7 +1,6 @@
 package tw.brad.javaee;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,29 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Brad09")
-public class Brad09 extends HttpServlet {
+@WebServlet("/Brad11")
+public class Brad11 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-//		String name = request.getParameter("name");
-//		if (name == null) name = "";
+		// 1: prepare
+		String x = request.getParameter("x");
+		String y = request.getParameter("y");
+		if (x == null) x = "0";
+		if (y == null) y = "0";
 		
+		// 2. modle
+		Brad12 model = new Brad12(x, y);
+		int result = model.add();
 		
+		// 3. viewer => view
 		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("Brad09");
-		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.print("<h1>Brad Big Company</h1>");
-		
-		//dispatcher.include(request, response);
+			request.getRequestDispatcher(
+				String.format("Brad13?x=%s&y=%s&result=%s", x,y,result)
+					);
 		dispatcher.forward(request, response);
-		
-		out.print("<hr>Footer");
-		
 		
 	}
 
