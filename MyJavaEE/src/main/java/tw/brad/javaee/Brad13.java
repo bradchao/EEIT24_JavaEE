@@ -32,7 +32,7 @@ public class Brad13 extends HttpServlet {
 		String op4 = op.equals("4")?"selected":"";
 		
 		PrintWriter out = response.getWriter();
-		String html = loadView(vfile);
+		String html = loadView("vfile");
 		out.print(String.format(html, x, op1, op2, op3, op4, y, result));
 		response.flushBuffer();
 		
@@ -41,10 +41,12 @@ public class Brad13 extends HttpServlet {
 	private String loadView(String viewFile) {
 		ServletContext context = getServletContext();
 		String viewPath = context.getInitParameter("viewPath");
+		System.out.println(viewPath);
 		
 		StringBuffer sb = new StringBuffer();
 		try {
 			File source = new File (viewPath, viewFile);
+			System.out.println(source.getAbsolutePath());
 			BufferedReader reader = 
 				new BufferedReader(
 					new InputStreamReader(
