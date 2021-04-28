@@ -3,6 +3,7 @@ package tw.brad.javaee;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
@@ -39,10 +40,13 @@ public class Brad17 extends HttpServlet {
 			prop.put("user", "root");
 			prop.put("password", "root");
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/iii", prop);
+					"jdbc:mysql://localhost:3306/", prop);
+			
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("INSERT INTO cust (cname,tel,birthday)" + 
-					" VALUES ('BradOK','777','2020-01-02')");
+			ResultSet rs = stmt.executeQuery("show databases");
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+			}
 			
 			
 			
