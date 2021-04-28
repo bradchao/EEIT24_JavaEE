@@ -45,11 +45,15 @@ public class Brad19 extends HttpServlet {
 			try {
 				if (login(account, passwd)) {
 					System.out.println("OK");
+					response.sendRedirect("main.html");
 				}else {
 					System.out.println("Xx");
+					response.sendRedirect("brad19.html");
 				}
 			}catch(Exception e) {
 				System.out.println("sql : " + e);
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, 
+						"Server Busy");
 			}
 		}
 		
