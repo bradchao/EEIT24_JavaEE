@@ -1,3 +1,4 @@
+<%@page import="tw.brad.utils.BradAPIs"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,15 +10,15 @@
 <body>
 <form action="brad40.jsp">
 	<input type="number" name="x" value="${param.x }" />
-	<select>
-		<option value="1">+</option>
-		<option value="2">-</option>
-		<option value="3">x</option>
-		<option value="4">/</option>
+	<select name="op">
+		<option value="1" ${(param.op == "1")?"selected":"" }>+</option>
+		<option value="2" ${(param.op == "2")?"selected":"" }>-</option>
+		<option value="3" ${(param.op == "3")?"selected":"" }>x</option>
+		<option value="4" ${(param.op == "4")?"selected":"" }>/</option>
 	</select>
 	<input type="number" name="y" value="${param.y }" />
 	<input type="submit" value="=" />
-	${param.x + param.y }
+	${BradAPIs.calc(param.x, param.y, param.op) }
 </form>
 </body>
 </html>
