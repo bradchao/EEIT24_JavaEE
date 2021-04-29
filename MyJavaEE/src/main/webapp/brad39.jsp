@@ -14,6 +14,22 @@
 Account: ${member.account }<br>
 Realname: ${member.realname }<br>
 Age: ${member.age }<br>
+<hr>
+<jsp:declaration>
+	int a;
+	String b;
+</jsp:declaration>
+<jsp:scriptlet>
+	a = 10;
+	b = "Brad";
+</jsp:scriptlet>
+
+a = <jsp:expression>a</jsp:expression><br>
+b = <jsp:expression>b</jsp:expression><br>
+<hr>
+Member = <jsp:expression>member</jsp:expression><br>
+Member = <%= member %><br>
+Member = ${member }
 
 
 </body>
