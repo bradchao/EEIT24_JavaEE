@@ -16,7 +16,7 @@
 </c:if>
 	
 <sql:query var="result">
-SELECT * FROM cust
+SELECT * FROM cust ORDER BY id desc
 </sql:query>	
 	    
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ SELECT * FROM cust
 </head>
 <body>
 
-<a href="">Add New Data</a>
+<a href="brad55.jsp">Add New Data</a>
 <hr />
 <table border="1" width="100%">
 	<tr>
@@ -38,14 +38,22 @@ SELECT * FROM cust
 		<th>Del</th>
 		<th>Edit</th>
 	</tr>
+	<script>
+		function delConfirm(account){
+			var isDel = confirm("Delet " + account + "?");
+			console.log(isDel + ":" + account);
+			return isDel;
+		}
+	</script>
 	<c:forEach items="${result.rows }" var="row">
 		<tr>
 			<td>${row.id }</td>
 			<td>${row.cname }</td>
 			<td>${row.tel }</td>
 			<td>${row.birthday }</td>
-			<td><a href="?delid=${row.id }">Del</a></td>
-			<td>Edit</td>
+			<td><a href="?delid=${row.id }" 
+				onclick="return delConfirm('${row.cname }');">Del</a></td>
+			<td><a href="brad56.jsp?editid=${row.id }">Eidt</a></td>
 		</tr>
 	</c:forEach>
 	
