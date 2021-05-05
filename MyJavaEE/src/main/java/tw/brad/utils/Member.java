@@ -37,4 +37,8 @@ public class Member {
 		this.age++;
 	}
 	
+	@Override
+	public String toString() {
+		return account+":"+realname+":"+age;
+	}
 }
