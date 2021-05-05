@@ -4,9 +4,6 @@
 <%
 	if (session.getAttribute("member") == null){
 		response.sendRedirect("brad62.jsp");
-	}else{
-		Member member = (Member)session.getAttribute("member");
-		pageContext.setAttribute("member", member);
 	}
 %>    
 <!DOCTYPE html>
