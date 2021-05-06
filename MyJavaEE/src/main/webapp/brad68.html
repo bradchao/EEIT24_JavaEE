@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script>
+			var xhttp = new XMLHttpRequest();
+			
+			// AJAX GET
+			function test1(){
+				var max = document.getElementById("max").value;
+				console.log("brad69.jsp?max=" + max);
+				
+				xhttp.onreadystatechange = callback;
+				xhttp.open("GET", "brad69.jsp?max=" + max, true);
+				xhttp.send();
+			}
+			
+			function callback(){
+				if (xhttp.readyState == 4 && xhttp.status == 200){
+					console.log("OK:" + xhttp.responseText);
+					document.getElementById("here").innerHTML 
+						= xhttp.responseText 
+				}
+			}
+			
+			// AJAX POST
+			function test2(){
+				xhttp.open("POST", "brad70.jsp", true);
+				xhttp.setRequestHeader(
+						'Content-type',
+						'application/x-www-form-urlencoded'
+						);
+				xhttp.onreadystatechange = callback2;
+				xhttp.send("x=10&y=3");				
+			}
+			
+			function callback2(){
+				if (xhttp.readyState == 4 && xhttp.status == 200){
+					document.getElementById("calc").innerHTML = 
+						xhttp.responseText;
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+	
+		<h1>Brad Big Company</h1>
+		<hr />
+		<input type="number" id="max" />
+		<input type="button" value="Test1" onClick="test1()" />
+		<hr />
+		Hello, World
+		<hr />
+		<div id="here"></div>
+		<hr />
+		<input type="button" value="Test2" onClick="test2()" />
+		<span id="calc"></span>
+	
+	</body>
+</html>

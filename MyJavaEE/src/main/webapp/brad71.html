@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+		<script>
+			$(document).ready(
+				function(){
+					$("#mybtn").click(
+						function(){
+							$("#here").load(
+								"brad72.jsp",
+								function(responseText, status, xhttp){
+									if (status == 'success'){
+										$("#here").html(responseText);			
+										//this.innerHTML = responseText; 
+									}else{
+										// error
+									}
+								}
+							);
+						}	
+					);
+					
+					$('#myget').click(
+						function(){
+							$.get('brad73.jsp',
+								function(responseText, status){
+									if (status == 'success'){
+										$('#here2').html(responseText);			
+									}
+								}		
+							);
+						}		
+					);
+				}		
+			);			
+		</script>
+		
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<input type="button" id="mybtn" value="Test1" />
+		<div id="here"></div>
+		<input type="button" id="myget" value="Test2" />
+		<div id="here2"></div>
+	
+	</body>
+</html>
