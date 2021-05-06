@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 		<script>
@@ -33,11 +34,39 @@
 							);
 						}		
 					);
+					
+					$('#mypost').click(
+						function(){
+							$.post(
+								"brad74.jsp",
+								{
+									name:"Brad",
+									age:18
+								},
+								function(responseText, status){
+									if (status == 'success'){
+										$('#here3').html(responseText);			
+									}
+								}
+							)
+						}		
+					);
+					
+					$('#myajax').click(
+						function(){
+							$.ajax({
+								url: "brad75.jsp",
+								success: function(responseText){
+									$('#here4').html(responseText);
+								}
+							});
+						}		
+					);
+					
 				}		
 			);			
 		</script>
 		
-		<meta charset="UTF-8">
 		<title>Insert title here</title>
 	</head>
 	<body>
@@ -45,6 +74,10 @@
 		<div id="here"></div>
 		<input type="button" id="myget" value="Test2" />
 		<div id="here2"></div>
+		<input type="button" id="mypost" value="Test3" />
+		<div id="here3"></div>
+		<input type="button" id="myajax" value="Test4" />
+		<div id="here4"></div>
 	
 	</body>
 </html>
