@@ -6,24 +6,36 @@
 		<script>
 			function test1(){
 				$.ajax({
-					url: "brad78.jsp",
+					url: "brad79.jsp",
 					type: "get",
 					success: doSuccess,
 					error: doError
 				});
 			}
-			function doSuccess(){
+			function doSuccess(json){
+				//console.log(json);
 				$("#table").empty();
 				
-				for (var i=0; i<10; i++){
-					$("#table").append(
+				var jsonRoot = $.parseJSON(json);	// array
+				
+				$(jsonRoot).each(
+					function(i, val){
+						/*
+						for ( [key, value] of Object.entries(val)){
+							console.log(key + ":" + value);
+						}
+						console.log("----");
+						*/
+						console.log(val.name + ":" + val.address);
+						$('#table').append(
 							'<tr>' +
-							'<td>' +
-							parseInt(Math.random()*49+1) +
-							'</td>' +
+							'<td>' + val.name + '</td>' +
+							'<td>' + val.address + '</td>' +
 							'</tr>'
 						);
-				}
+					}		
+				);
+				
 			}
 			function doError(){
 				
