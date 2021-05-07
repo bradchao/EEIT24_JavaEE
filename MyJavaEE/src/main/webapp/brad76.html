@@ -6,16 +6,24 @@
 		<script>
 			function test1(){
 				$.ajax({
-					url: "",
+					url: "brad78.jsp",
 					type: "get",
-					dataType: "jsonp",	// crossDomain
-					crossDomain: true,
 					success: doSuccess,
 					error: doError
 				});
 			}
 			function doSuccess(){
+				$("#table").empty();
 				
+				for (var i=0; i<10; i++){
+					$("#table").append(
+							'<tr>' +
+							'<td>' +
+							parseInt(Math.random()*49+1) +
+							'</td>' +
+							'</tr>'
+						);
+				}
 			}
 			function doError(){
 				
@@ -24,6 +32,12 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<input type="button" value="AJAX" onclick="test1()" />	
+		<input type="button" value="Load" onclick="test1()" /><br>
+		
+		<table border="1" width="100%" id="table" />
+		
+		
+		
+			
 	</body>
 </html>
