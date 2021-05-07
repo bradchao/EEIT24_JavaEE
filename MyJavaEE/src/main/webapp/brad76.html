@@ -4,28 +4,29 @@
 		<meta charset="UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script>
-			function test1(){
+			var page;
+			function test1(p){
 				$.ajax({
-					url: "brad79.jsp",
+					url: "brad79.jsp?page=" + p,
 					type: "get",
 					success: doSuccess,
 					error: doError
 				});
 			}
 			function doSuccess(json){
-				//console.log(json);
+				console.log(json);
+				
+				var jsonObj = $.parseJSON(json);	// object
+				page = jsonObj.page;
+				$('#page').html(page);
+				
+				if (jsonObj.error != 0){
+					return;
+				}
+				
 				$("#table").empty();
-				
-				var jsonRoot = $.parseJSON(json);	// array
-				
-				$(jsonRoot).each(
+				$(jsonObj.data).each(
 					function(i, val){
-						/*
-						for ( [key, value] of Object.entries(val)){
-							console.log(key + ":" + value);
-						}
-						console.log("----");
-						*/
 						console.log(val.name + ":" + val.address);
 						$('#table').append(
 							'<tr>' +
@@ -37,15 +38,21 @@
 				);
 				
 			}
-			function doError(){
-				
+			function doError(){}
+			function prev(){
+				test1(--page);
+			}
+			function next(){
+				test1(++page);
 			}
 		</script>		
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<input type="button" value="Load" onclick="test1()" /><br>
-		
+		<input type="button" value="Load" onclick="test1(1)" /><br>
+		<input type="button" value="Prev" onclick="prev()" />
+		<span id="page"></span>
+		<input type="button" value="Next" onclick="next()" />
 		<table border="1" width="100%" id="table" />
 		
 		
